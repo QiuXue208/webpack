@@ -13,6 +13,9 @@ type DepRelation = { key: string, deps: string[]; code: string }
 // 收集依赖关系
 const depRelation: DepRelation[] = []
 
+// 缓存所有模块
+const modules = {}
+
 // 将入口文件的绝对路径传入函数
 collect(resolve(projectRoot, 'index.js'))
 
@@ -53,4 +56,28 @@ function collect(filepath: string) {
 
 function getProjectPath(path: string) {
   return relative(projectRoot, path).replace(/\\/g, '/')
+}
+
+// 相对路径转成绝对路径
+function pathToKey(path: string, key: string) {
+  const dirname = key.substring(0, key.lastIndexOf('/') + 1)
+  const projectPath = (dirname + path).replace(/\.\//g, '').replace(/\/\//, '/')
+  return projectPath
+}
+
+function execute(key) {
+  // 如果已经require过，直接返回上次的结果
+  if(modules[key]) return modules[key]
+  const item = depRelation.find(i => i.key === key)
+  if (!item) throw new Error(`找不到模块${key}`)
+
+
+  // 执行其他模块
+  const require = path => execute(pathToKey(path, key))
+
+  modules[key] = { __esModule: true }
+
+  const module = { exports: modules[key] }
+  item?.code?.(require, module, module.exports)
+  return module.exports
 }
