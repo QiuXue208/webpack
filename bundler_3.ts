@@ -62,7 +62,18 @@ function collectCodeAndDeps(filepath: string) {
     return
   }
   // 获取文件内容，将内容放至 depRelation
-  const code = readFileSync(filepath).toString()
+  let code = readFileSync(filepath).toString()
+  if (/\.css$/.test(filepath)) {
+    code = `
+      const str = ${JSON.stringify(code)}
+      if (document) {
+        const style = document.createElement('style')
+        style.innerHTML = str
+        document.head.appendChild(style)
+      }
+      export default str
+    `
+  }
   const { code: es5Code } = babel.transform(code, {
     presets: ['@babel/preset-env']
   }) || {}
