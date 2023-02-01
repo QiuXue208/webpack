@@ -2,8 +2,10 @@ const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+const mode = process.env.NODE_ENV || 'production'
+
 module.exports = {
-  mode: 'development',
+  mode,
   entry: {
     main: './src/index.js'
   },
@@ -40,8 +42,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // 'style-loader',
-          MiniCssExtractPlugin.loader,
+          mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader: 'css-loader',
             options: {
