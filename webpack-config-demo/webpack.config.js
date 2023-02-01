@@ -9,11 +9,13 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
+    filename: '[name].[contenthash].js'
   },
   plugins: [new ESLintPlugin({
     extensions: ['js', 'jsx']
-  }), new MiniCssExtractPlugin()],
+  }), new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css'
+  })],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
