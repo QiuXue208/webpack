@@ -13,6 +13,11 @@ module.exports = {
   plugins: [new ESLintPlugin({
     extensions: ['js', 'jsx']
   })],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
   module: {
     rules: [
       {
