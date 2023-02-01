@@ -1,4 +1,5 @@
 const path = require('path')
+const DemoWebpackPlugin = require('./demo-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -14,6 +15,9 @@ module.exports = {
     // 从左往右查找
     modules: ['node_modules', './']
   },
+  plugins: [
+    new DemoWebpackPlugin()
+  ],
   module: {
     rules: [
       {
