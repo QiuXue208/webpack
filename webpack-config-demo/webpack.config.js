@@ -1,5 +1,6 @@
 const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: 'development',
@@ -12,7 +13,7 @@ module.exports = {
   },
   plugins: [new ESLintPlugin({
     extensions: ['js', 'jsx']
-  })],
+  }), new MiniCssExtractPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
@@ -37,7 +38,8 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -60,7 +62,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.less$/,
+        test: /\.less$/i,
         use: [
           'style-loader',
           'css-loader',
