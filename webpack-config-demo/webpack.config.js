@@ -15,9 +15,9 @@ module.exports = {
   },
   plugins: [new ESLintPlugin({
     extensions: ['js', 'jsx']
-  }), new MiniCssExtractPlugin({
+  }), mode === 'production' && new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css'
-  })],
+  })].filter(Boolean),
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
