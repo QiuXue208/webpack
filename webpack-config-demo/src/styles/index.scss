@@ -1,0 +1,10 @@
+h1 {
+  color: $color-main;
+}
+
+body {
+  color: $color-main;
+  h1, p {
+    color: $color-secondary;
+  }
+}

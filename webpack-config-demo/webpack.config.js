@@ -33,6 +33,32 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              additionalData: `
+                @import "~@/styles/vars.scss";
+              `,
+              sassOptions: {
+                includePaths: [__dirname]
+              }
+            },
+          }
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ]
       }
     ]
   }

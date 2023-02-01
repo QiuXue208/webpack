@@ -1,6 +1,7 @@
 import { a } from '@/a.js'
 import Comp from './comp.jsx'
 import Comp2 from './comp2.tsx'
+import '@/styles/index.scss'
 
 const b = import('./b')
 
