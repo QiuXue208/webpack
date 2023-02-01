@@ -2,6 +2,7 @@ import { a } from '@/a.js'
 import Comp from './comp.jsx'
 import Comp2 from './comp2.tsx'
 import '@/styles/index.scss'
+import vars from '@/styles/export-vars.scss'
 
 const b = import('./b')
 
@@ -15,6 +16,7 @@ const init = () => {
   console.log(Comp2)
   console.log(c)
   console.log(d)
+  console.log(vars)
 }
 
 init()
