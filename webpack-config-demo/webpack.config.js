@@ -28,6 +28,9 @@ module.exports = {
   devServer: {
     hot: true
   },
+  optimization: {
+    runtimeChunk: 'single',
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
