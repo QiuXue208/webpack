@@ -3,6 +3,7 @@ import Comp from './comp.jsx'
 import Comp2 from './comp2.tsx'
 import '@/styles/index.scss'
 import vars from '@/styles/export-vars.scss'
+import shared from './shared.js'
 
 const b = import('./b')
 
@@ -18,6 +19,7 @@ const init = () => {
   console.log(d)
   console.log(vars)
   console.log('热更新')
+  console.log(shared)
 }
 
 init()
