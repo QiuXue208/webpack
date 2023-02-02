@@ -30,6 +30,16 @@ module.exports = {
   },
   optimization: {
     runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all', // all表示同步和异步加载
+      minSize: 0, // 如果不写0，由于React太小，会直接跳过
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          filename: 'vendors.[contenthash].js',
+        }
+      },
+    }
   },
   resolve: {
     alias: {
