@@ -36,12 +36,20 @@ module.exports = {
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
-      chunks: 'all', // all表示同步和异步加载
-      minSize: 0, // 如果不写0，由于React太小，会直接跳过
       cacheGroups: {
         defaultVendors: {
+          priority: 10,
+          chunks: 'all', // all表示同步和异步加载
+          minSize: 0, // 如果不写0，由于React太小，会直接跳过
           test: /[\\/]node_modules[\\/]/,
-          filename: 'vendors.[contenthash].js',
+          name: 'vendors'
+        },
+        common: {
+          priority: 5,
+          name: 'common',
+          minSize: 0,
+          minChunks: 2,
+          chunks: 'all', // all表示同步和异步加载
         }
       },
     }
