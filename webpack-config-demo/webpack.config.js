@@ -9,7 +9,8 @@ const mode = process.env.NODE_ENV || 'production'
 module.exports = {
   mode,
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
+    admin: './src/admin.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -23,6 +24,10 @@ module.exports = {
       filename: '[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'admin.html',
+      chunks: ['admin']
+    }),
     new webpack.HotModuleReplacementPlugin(),
   ].filter(Boolean),
   devServer: {
