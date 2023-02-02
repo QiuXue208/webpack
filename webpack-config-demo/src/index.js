@@ -17,6 +17,7 @@ const init = () => {
   console.log(c)
   console.log(d)
   console.log(vars)
+  console.log('热更新')
 }
 
 init()

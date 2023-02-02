@@ -2,6 +2,7 @@ const path = require('path')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 const mode = process.env.NODE_ENV || 'production'
 
@@ -22,7 +23,11 @@ module.exports = {
       filename: '[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ].filter(Boolean),
+  devServer: {
+    hot: true
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
